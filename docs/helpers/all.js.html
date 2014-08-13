@@ -45,7 +45,7 @@
 
 <span class="nx">fs</span><span class="p">.</span><span class="nx">readdirSync</span><span class="p">(</span><span class="nx">path</span><span class="p">.</span><span class="nx">join</span><span class="p">(</span><span class="nx">__dirname</span><span class="p">)).</span><span class="nx">forEach</span><span class="p">(</span><span class="kd">function</span><span class="p">(</span><span class="nx">file</span><span class="p">)</span> <span class="p">{</span>
   <span class="k">if</span> <span class="p">(</span><span class="nx">file</span> <span class="o">!=</span> <span class="s1">&#39;all.js&#39;</span><span class="p">)</span>
-    <span class="nx">_</span><span class="p">.</span><span class="nx">extend</span><span class="p">(</span><span class="nx">module</span><span class="p">.</span><span class="nx">exports</span><span class="p">.</span><span class="nx">helpers</span><span class="p">.</span><span class="nx">all</span><span class="p">,</span> <span class="nx">require</span><span class="p">(</span><span class="s1">&#39;./&#39;</span><span class="o">+</span> <span class="nx">file</span><span class="p">));</span>
+    <span class="nx">_</span><span class="p">.</span><span class="nx">extend</span><span class="p">(</span><span class="nx">module</span><span class="p">.</span><span class="nx">exports</span><span class="p">,</span> <span class="nx">require</span><span class="p">(</span><span class="s1">&#39;./&#39;</span><span class="o">+</span> <span class="nx">file</span><span class="p">));</span>
 <span class="p">});</span>
 </pre></div>
         </td>

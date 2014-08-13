@@ -7,5 +7,5 @@ module.exports = {};
 
 fs.readdirSync(path.join(__dirname)).forEach(function(file) {
   if (file != 'all.js')
-    _.extend(module.exports.helpers.all, require('./'+ file));
+    _.extend(module.exports, require('./'+ file));
 });
