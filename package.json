@@ -1,0 +1,8 @@
+{
+  "name": "Handlebars-Helpers",
+  "description": "A consistent bunch of handlebars helpers, all properly documented.",
+  "version": "0.0.1",
+  "dependencies": {
+    "lodash": "~2.4.1"
+  }
+}
