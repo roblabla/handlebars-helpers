@@ -4,5 +4,11 @@
   "version": "0.0.1",
   "dependencies": {
     "lodash": "~2.4.1"
+  },
+  "devDependencies": {
+    "docker": "~0.2.13"
+  },
+  "scripts": {
+    "doc": "node node_modules/docker/docker -i . -o docs --exclude .git,docs,node_modules"
   }
 }

@@ -1,20 +1,22 @@
+// Helpers that helps dealing with arrays and objects.
 module.exports = {
-  /**
-   * {{length [array]}}
-   *
-   * Returns the number of elements in the array
-   */
+  // `{{length [array]}}`
+  //
+  // Expression Helper.
+  //
+  // Returns the number of elements in the array
+  //
   length: function (array) {
     return array.length;
   },
 
-  /**
-   * {{#foreach [array]}}
-   * {{/foreach}}
-   *
-   * Iterate over array. Adds 'index', 'total', 'isLast' and 'isFirst' to
-   * context.
-   */
+  // `{{#foreach [array]}}`
+  //
+  // Block Helper
+  //
+  // Iterate over array. Adds `index`, `total`, `isLast` and `isFirst` to
+  // context, and execute the block with said context.
+  //
   foreach: function (array, options) {
     var res = '';
     for (var i = 0; i < array.length; i++) {
@@ -28,11 +30,14 @@ module.exports = {
     return res;
   },
 
-  /**
-   * {{#any [array]}}
-   *
-   * Execute block if array has at least one element
-   */
+  // `{{#any [array]}}`
+  //
+  // Hybrid Helper.
+  //
+  // Conditional Block Form : Execute block if array has at least one element.
+  //
+  // Expression Form : returns true if array has at least one element.
+  //
   any: function (array, options) {
     if (typeof options === "undefined")
       return array.length > 0;
@@ -42,11 +47,14 @@ module.exports = {
       return options.inverse(this);
   },
 
-  /**
-   * {{#empty [array]}}
-   *
-   * Execute block if array is empty.
-   */
+  // `{{#empty [array]}}`
+  //
+  // Hybrid Helper.
+  //
+  // Conditional Block Form : Execute block if array is empty.
+  //
+  // Expression Form : returns true if array is empty.
+  //
   empty: function (array, options) {
     if (typeof options === "undefined")
       return array.length === 0;

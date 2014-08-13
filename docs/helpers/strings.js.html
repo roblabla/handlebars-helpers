@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>strings.js</title>
+  <meta http-equiv="content-type" content="text/html; charset=UTF-8">
+  <link rel="stylesheet" media="all" href="../doc-style.css" />
+  <script src="../doc-filelist.js"></script>
+  <script>
+    var relativeDir = "../", thisFile = "C:\\Users\\Robin\\Dropbox\\dev\\src\\js\\handlebarshelpers\\helpers\\stringsjs", defaultSidebar = true;
+  </script>
+  <script src="../doc-script.js"></script>
+</head>
+<body>
+  <div id="sidebar_wrapper">
+    <div id="sidebar_switch">
+      <span class="tree">Files</span>
+      <span class="headings">Headings</span>
+    </div>
+    <div id="tree"></div>
+    <div id="headings">
+    </div>
+  </div>
+  <div id="sidebar-toggle"></div>
+  <div id="container"><div class="background highlight"></div>
+<table cellpadding="0" cellspacing="0">
+  <tbody>
+      <tr>
+        <td class="docs">
+          <h1>strings.js</h1>
+        </td>
+        <td class="code highlight"></td>
+      </tr>
+      <tr>
+        <td class="docs">
+<div class="pilwrap">
+  <a class="pilcrow" href="#section-1" id="section-1">&#182;</a>
+</div>
+
+        </td>
+        <td class="code highlight"><div class="highlight"><pre><span class="nx">module</span><span class="p">.</span><span class="nx">exports</span> <span class="o">=</span> <span class="p">{</span>
+
+</pre></div>
+        </td>
+      </tr>
+      <tr>
+        <td class="docs">
+<div class="pilwrap">
+  <a class="pilcrow" href="#section-2" id="section-2">&#182;</a>
+</div>
+<p>{{lowercase [text]}}</p>
+
+<p>Hybrid Helper</p>
+
+<p>Expression Form : Makes all letters in text lowercase</p>
+
+<p>Block Form : Executes the block, and makes its result lowercase.</p>
+        </td>
+        <td class="code highlight"><div class="highlight"><pre>
+  <span class="nx">lowercase</span><span class="o">:</span> <span class="kd">function</span><span class="p">(</span><span class="nx">text</span><span class="p">)</span> <span class="p">{</span>
+    <span class="k">if</span> <span class="p">(</span><span class="k">typeof</span> <span class="nx">text</span> <span class="o">===</span> <span class="s2">&quot;string&quot;</span><span class="p">)</span>
+      <span class="k">return</span> <span class="nx">text</span><span class="p">.</span><span class="nx">toLowerCase</span><span class="p">();</span>
+    <span class="k">else</span> <span class="k">if</span> <span class="p">(</span><span class="k">typeof</span> <span class="nx">text</span> <span class="o">===</span> <span class="s2">&quot;object&quot;</span><span class="p">)</span>
+      <span class="k">return</span> <span class="nx">text</span><span class="p">.</span><span class="nx">fn</span><span class="p">(</span><span class="k">this</span><span class="p">).</span><span class="nx">toLowerCase</span><span class="p">();</span>
+  <span class="p">},</span>
+
+
+</pre></div>
+        </td>
+      </tr>
+      <tr>
+        <td class="docs">
+<div class="pilwrap">
+  <a class="pilcrow" href="#section-3" id="section-3">&#182;</a>
+</div>
+<p>{{uppercase [text]}}</p>
+
+<p>Hybrid Helper</p>
+
+<p>Expression Form : Makes all letters in text uppercase.</p>
+
+<p>Block Form : Executes the block, and makes its result uppercase.</p>
+        </td>
+        <td class="code highlight"><div class="highlight"><pre>
+  <span class="nx">uppercase</span><span class="o">:</span> <span class="kd">function</span><span class="p">(</span><span class="nx">text</span><span class="p">)</span> <span class="p">{</span>
+    <span class="k">if</span> <span class="p">(</span><span class="k">typeof</span> <span class="nx">text</span> <span class="o">===</span> <span class="s2">&quot;string&quot;</span><span class="p">)</span>
+      <span class="k">return</span> <span class="nx">text</span><span class="p">.</span><span class="nx">toUpperCase</span><span class="p">();</span>
+    <span class="k">else</span> <span class="k">if</span> <span class="p">(</span><span class="k">typeof</span> <span class="nx">text</span> <span class="o">===</span> <span class="s2">&quot;object&quot;</span><span class="p">)</span>
+      <span class="k">return</span> <span class="nx">text</span><span class="p">.</span><span class="nx">fn</span><span class="p">(</span><span class="k">this</span><span class="p">).</span><span class="nx">toLowerCase</span><span class="p">();</span>
+  <span class="p">}</span>
+<span class="p">};</span>
+</pre></div>
+        </td>
+      </tr>
+  </tbody>
+</table>
+  </div>
+</body>
+</html>
