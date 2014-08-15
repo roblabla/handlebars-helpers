@@ -19,7 +19,7 @@ return {
     if (typeof context === "undefined")
       context = this;
     name = options.include.lookup(name);
-    if (!options.include.cache.containsKey(name))
+    if (!(name in options.include.cache))
       options.include.cache[name] = Handlebars.compile(fs.readFileSync(name));
     return options.cache[name](context);
   }
