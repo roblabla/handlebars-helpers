@@ -1,5 +1,6 @@
+module.exports = function(Handlebars) {
 // Helpers that helps dealing with arrays and objects.
-module.exports = {
+return {
   // `{{length [array]}}`
   //
   // Expression Helper.
@@ -63,4 +64,5 @@ module.exports = {
     else
       return options.inverse(this);
   }
+};
 };

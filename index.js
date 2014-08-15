@@ -10,11 +10,9 @@
 // Convenience object : require('Handlebars-Helpers').helpers
 module.exports.helpers = require('./helpers/all');
 
-// Simple function to register all the helpers into an Handlebars instance
-module.exports.register = function(Handlebars, helpers) {
-  if (typeof helpers === "undefined")
-    helpers = require('./helpers');
-  Object.keys(helpers).forEach(function (key) {
-    Handlebars.registerHelper(key, helpers[key]);
-  });
+module.exports.register = function (Handlebars, options) {
+  var helpers = module.exports.helpers(Handlebars, options);
+  for (var key in helpers)
+    if (helpers.hasOwnProperty(key))
+      Handlebars.registerHelper(key, helpers[key]);
 };

@@ -1,4 +1,5 @@
-module.exports = {
+module.exports = function (Handlebars) {
+return {
   // {{lowercase [text]}}
   //
   // Hybrid Helper
@@ -28,4 +29,5 @@ module.exports = {
     else if (typeof text === "object")
       return text.fn(this).toLowerCase();
   }
+};
 };

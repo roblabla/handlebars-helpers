@@ -1,11 +1,14 @@
+module.exports = function (Handlebars, options) {
 // Load require nodejs modules
 var fs    = require('fs');
 var path  = require('path');
 var _     = require('lodash');
 
-module.exports = {};
+var returnValue = {};
 
 fs.readdirSync(path.join(__dirname)).forEach(function(file) {
   if (file != 'all.js')
-    _.extend(module.exports, require('./'+ file));
+    _.extend(returnValue, require('./'+ file)(Handlebars, options));
 });
+return returnValue;
+};

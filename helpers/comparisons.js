@@ -1,5 +1,6 @@
+module.exports = function (Handlebars) {
 // Helpers to help with basic comparisons.
-module.exports = {
+return {
   // `{{and [a] [b]}}`
   //
   // Hybrid Helper
@@ -128,4 +129,5 @@ module.exports = {
     else
       return options.inverse(this);
   },
+};
 };
