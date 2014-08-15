@@ -1,5 +1,5 @@
 module.exports = function(Handlebars, options) {
-var path  = require("path");
+var fs    = require("fs");
 var _     = require("lodash");
 
 options = _.merge(options, {include: {
