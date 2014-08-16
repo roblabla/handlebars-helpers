@@ -22,7 +22,7 @@ return {
       context = this[context];
     name = options.include.lookup(name);
     var template;
-    if (options.include.cache && name in options.include.cache) {
+    if (options.include.cache && name in options.include.cache)
       template = options.include.cache[name];
     else {
       template = Handlebars.compile(fs.readFileSync(name, 'utf8'));
