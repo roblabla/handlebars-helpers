@@ -10,6 +10,9 @@
 // Convenience object : require('Handlebars-Helpers').helpers
 module.exports.helpers = require('./helpers/all');
 
+// You NEED to give a handlebars object when registering, and optionally
+// an option object. This options object right now is only used for the
+// include helper, for cache and path resolution.
 module.exports.register = function (Handlebars, options) {
   var helpers = module.exports.helpers(Handlebars, options);
   for (var key in helpers)
