@@ -2,8 +2,8 @@ module.exports = function(Handlebars, options) {
 var fs    = require("fs");
 var _     = require("lodash");
 
-options = _.merge(options, {include: {
-  lookup: function(path) {return path; },
+options = _.defaults(options, {include: {
+  lookup: function(path) { return path; },
   cache: {}
 }});
 if (typeof Handlebars === "undefined")
@@ -18,10 +18,12 @@ return {
   include: function (name, context) {
     if (typeof context === "undefined")
       context = this;
+    else
+      context = this[context];
     name = options.include.lookup(name);
     if (!(name in options.include.cache))
-      options.include.cache[name] = Handlebars.compile(fs.readFileSync(name));
-    return options.cache[name](context);
+      options.include.cache[name] = Handlebars.compile(fs.readFileSync(name, 'utf8'));
+    return new Handlebars.SafeString(options.include.cache[name](context));
   }
 };
 };
