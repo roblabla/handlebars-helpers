@@ -1,0 +1,205 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>layouts.js</title>
+  <meta http-equiv="content-type" content="text/html; charset=UTF-8">
+  <link rel="stylesheet" media="all" href="../doc-style.css" />
+  <script src="../doc-filelist.js"></script>
+  <script>
+    var relativeDir = "../", thisFile = "C:\\Users\\Robin\\Dropbox\\dev\\src\\js\\handlebarshelpers\\helpers\\layoutsjs", defaultSidebar = true;
+  </script>
+  <script src="../doc-script.js"></script>
+</head>
+<body>
+  <div id="sidebar_wrapper">
+    <div id="sidebar_switch">
+      <span class="tree">Files</span>
+      <span class="headings">Headings</span>
+    </div>
+    <div id="tree"></div>
+    <div id="headings">
+    </div>
+  </div>
+  <div id="sidebar-toggle"></div>
+  <div id="container"><div class="background highlight"></div>
+<table cellpadding="0" cellspacing="0">
+  <tbody>
+      <tr>
+        <td class="docs">
+          <h1>layouts.js</h1>
+        </td>
+        <td class="code highlight"></td>
+      </tr>
+      <tr>
+        <td class="docs">
+<div class="pilwrap">
+  <a class="pilcrow" href="#section-1" id="section-1">&#182;</a>
+</div>
+
+        </td>
+        <td class="code highlight"><div class="highlight"><pre><span class="nx">module</span><span class="p">.</span><span class="nx">exports</span> <span class="o">=</span> <span class="kd">function</span><span class="p">(</span><span class="nx">Handlebars</span><span class="p">,</span> <span class="nx">options</span><span class="p">)</span> <span class="p">{</span>
+<span class="kd">var</span> <span class="nx">fs</span>    <span class="o">=</span> <span class="nx">require</span><span class="p">(</span><span class="s2">&quot;fs&quot;</span><span class="p">);</span>
+<span class="kd">var</span> <span class="nx">_</span>     <span class="o">=</span> <span class="nx">require</span><span class="p">(</span><span class="s2">&quot;lodash&quot;</span><span class="p">);</span>
+
+<span class="nx">options</span> <span class="o">=</span> <span class="nx">_</span><span class="p">.</span><span class="nx">defaults</span><span class="p">(</span><span class="nx">options</span><span class="p">,</span> <span class="p">{</span>
+  <span class="nx">lookup</span><span class="o">:</span> <span class="kd">function</span><span class="p">(</span><span class="nx">path</span><span class="p">)</span> <span class="p">{</span> <span class="k">return</span> <span class="nx">path</span><span class="p">;</span> <span class="p">},</span>
+  <span class="nx">cache</span><span class="o">:</span> <span class="kc">null</span>
+<span class="p">});</span>
+<span class="k">if</span> <span class="p">(</span><span class="k">typeof</span> <span class="nx">Handlebars</span> <span class="o">===</span> <span class="s2">&quot;undefined&quot;</span><span class="p">)</span>
+  <span class="nx">Handlebars</span> <span class="o">=</span> <span class="nx">require</span><span class="p">(</span><span class="s2">&quot;handlebars&quot;</span><span class="p">);</span>
+
+<span class="kd">function</span> <span class="nx">getTemplate</span><span class="p">(</span><span class="nx">name</span><span class="p">)</span> <span class="p">{</span>
+  <span class="nx">name</span> <span class="o">=</span> <span class="nx">options</span><span class="p">.</span><span class="nx">lookup</span><span class="p">(</span><span class="nx">name</span><span class="p">);</span>
+  <span class="kd">var</span> <span class="nx">template</span><span class="p">;</span>
+  <span class="k">if</span> <span class="p">(</span><span class="nx">options</span><span class="p">.</span><span class="nx">cache</span> <span class="o">&amp;&amp;</span> <span class="nx">name</span> <span class="k">in</span> <span class="nx">options</span><span class="p">.</span><span class="nx">cache</span><span class="p">)</span>
+    <span class="nx">template</span> <span class="o">=</span> <span class="nx">options</span><span class="p">.</span><span class="nx">cache</span><span class="p">[</span><span class="nx">name</span><span class="p">];</span>
+  <span class="k">else</span> <span class="p">{</span>
+    <span class="nx">template</span> <span class="o">=</span> <span class="nx">Handlebars</span><span class="p">.</span><span class="nx">compile</span><span class="p">(</span><span class="nx">fs</span><span class="p">.</span><span class="nx">readFileSync</span><span class="p">(</span><span class="nx">name</span><span class="p">,</span> <span class="s1">&#39;utf8&#39;</span><span class="p">));</span>
+    <span class="k">if</span> <span class="p">(</span><span class="nx">options</span><span class="p">.</span><span class="nx">cache</span><span class="p">)</span>
+      <span class="nx">options</span><span class="p">.</span><span class="nx">cache</span><span class="p">[</span><span class="nx">name</span><span class="p">]</span> <span class="o">=</span> <span class="nx">template</span><span class="p">;</span>
+  <span class="p">}</span>
+  <span class="k">return</span> <span class="nx">template</span><span class="p">;</span>
+<span class="p">}</span>
+
+<span class="k">return</span> <span class="p">{</span>
+
+</pre></div>
+        </td>
+      </tr>
+      <tr>
+        <td class="docs">
+<div class="pilwrap">
+  <a class="pilcrow" href="#section-2" id="section-2">&#182;</a>
+</div>
+<p><code>{{include [name] (context)}}</code></p>
+
+<p>Expression Helper</p>
+
+<p>Executes the given template and returns its value, executed with
+given context or "this" if context is not supplied.</p>
+        </td>
+        <td class="code highlight"><div class="highlight"><pre>
+  <span class="nx">include</span><span class="o">:</span> <span class="kd">function</span> <span class="p">(</span><span class="nx">name</span><span class="p">,</span> <span class="nx">context</span><span class="p">)</span> <span class="p">{</span>
+    <span class="k">if</span> <span class="p">(</span><span class="k">typeof</span> <span class="nx">context</span> <span class="o">===</span> <span class="s2">&quot;undefined&quot;</span><span class="p">)</span>
+      <span class="nx">context</span> <span class="o">=</span> <span class="k">this</span><span class="p">;</span>
+    <span class="k">return</span> <span class="k">new</span> <span class="nx">Handlebars</span><span class="p">.</span><span class="nx">SafeString</span><span class="p">(</span><span class="nx">getTemplate</span><span class="p">(</span><span class="nx">name</span><span class="p">)(</span><span class="nx">context</span><span class="p">));</span>
+  <span class="p">},</span>
+
+
+</pre></div>
+        </td>
+      </tr>
+      <tr>
+        <td class="docs">
+<div class="pilwrap">
+  <a class="pilcrow" href="#section-3" id="section-3">&#182;</a>
+</div>
+<p><code>{{# extend [name]}}</code></p>
+
+<p>Block Helper</p>
+
+<p>Executes the given template</p>
+        </td>
+        <td class="code highlight"><div class="highlight"><pre>
+  <span class="nx">extend</span><span class="o">:</span> <span class="kd">function</span> <span class="p">(</span><span class="nx">name</span><span class="p">,</span> <span class="nx">options</span><span class="p">)</span> <span class="p">{</span>
+    <span class="nx">options</span><span class="p">.</span><span class="nx">fn</span><span class="p">(</span><span class="k">this</span><span class="p">);</span>
+    <span class="k">return</span> <span class="k">new</span> <span class="nx">Handlebars</span><span class="p">.</span><span class="nx">SafeString</span><span class="p">(</span><span class="nx">getTemplate</span><span class="p">(</span><span class="nx">name</span><span class="p">)(</span><span class="k">this</span><span class="p">));</span>
+  <span class="p">},</span>
+
+
+</pre></div>
+        </td>
+      </tr>
+      <tr>
+        <td class="docs">
+<div class="pilwrap">
+  <a class="pilcrow" href="#section-4" id="section-4">&#182;</a>
+</div>
+<p><code>{{block [name]}}</code></p>
+
+<p>Hybrid Helper</p>
+
+<p>Expression Form : Places a block at specified position with no content</p>
+
+<p>Block Form : Places a block at the specified position, with the specified
+content</p>
+        </td>
+        <td class="code highlight"><div class="highlight"><pre>
+  <span class="nx">block</span><span class="o">:</span> <span class="kd">function</span><span class="p">(</span><span class="nx">name</span><span class="p">,</span> <span class="nx">options</span><span class="p">)</span> <span class="p">{</span>
+    <span class="kd">var</span> <span class="nx">defval</span> <span class="o">=</span> <span class="nx">options</span> <span class="o">?</span> <span class="nx">options</span><span class="p">.</span><span class="nx">fn</span><span class="p">(</span><span class="k">this</span><span class="p">)</span> <span class="o">:</span> <span class="s2">&quot;&quot;</span><span class="p">;</span>
+    <span class="k">if</span> <span class="p">(</span><span class="k">typeof</span> <span class="k">this</span><span class="p">.</span><span class="nx">_blocks</span> <span class="o">===</span> <span class="s2">&quot;undefined&quot;</span><span class="p">)</span> <span class="k">this</span><span class="p">.</span><span class="nx">_blocks</span> <span class="o">=</span> <span class="p">{};</span>
+    <span class="k">if</span> <span class="p">(</span><span class="nx">name</span> <span class="k">in</span> <span class="k">this</span><span class="p">.</span><span class="nx">_blocks</span><span class="p">)</span> <span class="p">{</span>
+      <span class="k">switch</span> <span class="p">(</span><span class="k">this</span><span class="p">.</span><span class="nx">_blocks</span><span class="p">[</span><span class="nx">name</span><span class="p">].</span><span class="nx">type</span><span class="p">)</span> <span class="p">{</span>
+      <span class="k">case</span> <span class="s2">&quot;append&quot;</span><span class="o">:</span>
+        <span class="k">return</span> <span class="nx">defval</span> <span class="o">+</span> <span class="k">this</span><span class="p">.</span><span class="nx">_blocks</span><span class="p">[</span><span class="nx">name</span><span class="p">].</span><span class="nx">content</span><span class="p">;</span>
+      <span class="k">case</span> <span class="s2">&quot;prepend&quot;</span><span class="o">:</span>
+        <span class="k">return</span> <span class="k">this</span><span class="p">.</span><span class="nx">_blocks</span><span class="p">[</span><span class="nx">name</span><span class="p">].</span><span class="nx">content</span> <span class="o">+</span> <span class="nx">defval</span><span class="p">;</span>
+      <span class="k">case</span> <span class="s2">&quot;replace&quot;</span><span class="o">:</span>
+        <span class="k">return</span> <span class="k">this</span><span class="p">.</span><span class="nx">_blocks</span><span class="p">[</span><span class="nx">name</span><span class="p">].</span><span class="nx">content</span><span class="p">;</span>
+      <span class="p">}</span>
+    <span class="p">}</span>
+  <span class="p">},</span>
+
+
+</pre></div>
+        </td>
+      </tr>
+      <tr>
+        <td class="docs">
+<div class="pilwrap">
+  <a class="pilcrow" href="#section-5" id="section-5">&#182;</a>
+</div>
+<p>! TODO : Fix nested extends !
+<code>{{#replace [name]}}</code></p>
+
+<p>Block Helper : </p>
+        </td>
+        <td class="code highlight"><div class="highlight"><pre>
+  <span class="nx">replace</span><span class="o">:</span> <span class="kd">function</span><span class="p">(</span><span class="nx">name</span><span class="p">,</span> <span class="nx">options</span><span class="p">)</span> <span class="p">{</span>
+    <span class="k">if</span> <span class="p">(</span><span class="k">typeof</span> <span class="k">this</span><span class="p">.</span><span class="nx">_blocks</span> <span class="o">===</span> <span class="s2">&quot;undefined&quot;</span><span class="p">)</span> <span class="k">this</span><span class="p">.</span><span class="nx">_blocks</span> <span class="o">=</span> <span class="p">{};</span>
+    <span class="k">this</span><span class="p">.</span><span class="nx">_blocks</span><span class="p">[</span><span class="nx">name</span><span class="p">]</span> <span class="o">=</span> <span class="p">{</span> <span class="nx">type</span><span class="o">:</span> <span class="s2">&quot;replace&quot;</span><span class="p">,</span> <span class="nx">content</span><span class="o">:</span> <span class="nx">options</span><span class="p">.</span><span class="nx">fn</span><span class="p">(</span><span class="k">this</span><span class="p">)</span> <span class="p">};</span>
+  <span class="p">},</span>
+
+
+</pre></div>
+        </td>
+      </tr>
+      <tr>
+        <td class="docs">
+<div class="pilwrap">
+  <a class="pilcrow" href="#section-6" id="section-6">&#182;</a>
+</div>
+<p><code>{{#append [name]}}</code></p>
+        </td>
+        <td class="code highlight"><div class="highlight"><pre>
+  <span class="nx">append</span><span class="o">:</span> <span class="kd">function</span><span class="p">(</span><span class="nx">name</span><span class="p">,</span> <span class="nx">options</span><span class="p">)</span> <span class="p">{</span>
+    <span class="k">if</span> <span class="p">(</span><span class="k">typeof</span> <span class="k">this</span><span class="p">.</span><span class="nx">_blocks</span> <span class="o">===</span> <span class="s2">&quot;undefined&quot;</span><span class="p">)</span> <span class="k">this</span><span class="p">.</span><span class="nx">_blocks</span> <span class="o">=</span> <span class="p">{};</span>
+    <span class="k">this</span><span class="p">.</span><span class="nx">_blocks</span><span class="p">[</span><span class="nx">name</span><span class="p">]</span> <span class="o">=</span> <span class="p">{</span> <span class="nx">type</span><span class="o">:</span> <span class="s2">&quot;append&quot;</span><span class="p">,</span> <span class="nx">content</span><span class="o">:</span> <span class="nx">options</span><span class="p">.</span><span class="nx">fn</span><span class="p">(</span><span class="k">this</span><span class="p">)</span> <span class="p">};</span>
+  <span class="p">},</span>
+
+
+</pre></div>
+        </td>
+      </tr>
+      <tr>
+        <td class="docs">
+<div class="pilwrap">
+  <a class="pilcrow" href="#section-7" id="section-7">&#182;</a>
+</div>
+<p><code>{{#prepend [name]}}</code></p>
+        </td>
+        <td class="code highlight"><div class="highlight"><pre>
+  <span class="nx">prepend</span><span class="o">:</span> <span class="kd">function</span><span class="p">(</span><span class="nx">name</span><span class="p">,</span> <span class="nx">options</span><span class="p">)</span> <span class="p">{</span>
+    <span class="k">if</span> <span class="p">(</span><span class="k">typeof</span> <span class="k">this</span><span class="p">.</span><span class="nx">_blocks</span> <span class="o">===</span> <span class="s2">&quot;undefined&quot;</span><span class="p">)</span> <span class="k">this</span><span class="p">.</span><span class="nx">_blocks</span> <span class="o">=</span> <span class="p">{};</span>
+    <span class="k">this</span><span class="p">.</span><span class="nx">_blocks</span><span class="p">[</span><span class="nx">name</span><span class="p">]</span> <span class="o">=</span> <span class="p">{</span> <span class="nx">type</span><span class="o">:</span> <span class="s2">&quot;prepend&quot;</span><span class="p">,</span> <span class="nx">content</span><span class="o">:</span> <span class="nx">options</span><span class="p">.</span><span class="nx">fn</span><span class="p">(</span><span class="k">this</span><span class="p">)</span> <span class="p">};</span>
+  <span class="p">}</span>
+<span class="p">};</span>
+<span class="p">};</span>
+</pre></div>
+        </td>
+      </tr>
+  </tbody>
+</table>
+  </div>
+</body>
+</html>

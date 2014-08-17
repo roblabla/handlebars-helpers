@@ -35,9 +35,9 @@
 <div class="pilwrap">
   <a class="pilcrow" href="#section-1" id="section-1">&#182;</a>
 </div>
-<p>Helpers that helps dealing with arrays and objects.</p>
+
         </td>
-        <td class="code highlight"><div class="highlight"><pre><span class="nx">module</span><span class="p">.</span><span class="nx">exports</span> <span class="o">=</span> <span class="p">{</span>
+        <td class="code highlight"><div class="highlight"><pre><span class="nx">module</span><span class="p">.</span><span class="nx">exports</span> <span class="o">=</span> <span class="kd">function</span><span class="p">(</span><span class="nx">Handlebars</span><span class="p">)</span> <span class="p">{</span>
 
 </pre></div>
         </td>
@@ -46,6 +46,19 @@
         <td class="docs">
 <div class="pilwrap">
   <a class="pilcrow" href="#section-2" id="section-2">&#182;</a>
+</div>
+<p>Helpers that helps dealing with arrays and objects.</p>
+        </td>
+        <td class="code highlight"><div class="highlight"><pre>
+<span class="k">return</span> <span class="p">{</span>
+
+</pre></div>
+        </td>
+      </tr>
+      <tr>
+        <td class="docs">
+<div class="pilwrap">
+  <a class="pilcrow" href="#section-3" id="section-3">&#182;</a>
 </div>
 <p><code>{{length [array]}}</code></p>
 
@@ -65,7 +78,7 @@
       <tr>
         <td class="docs">
 <div class="pilwrap">
-  <a class="pilcrow" href="#section-3" id="section-3">&#182;</a>
+  <a class="pilcrow" href="#section-4" id="section-4">&#182;</a>
 </div>
 <p><code>{{#foreach [array]}}</code></p>
 
@@ -95,7 +108,7 @@ context, and execute the block with said context.</p>
       <tr>
         <td class="docs">
 <div class="pilwrap">
-  <a class="pilcrow" href="#section-4" id="section-4">&#182;</a>
+  <a class="pilcrow" href="#section-5" id="section-5">&#182;</a>
 </div>
 <p><code>{{#any [array]}}</code></p>
 
@@ -122,7 +135,7 @@ context, and execute the block with said context.</p>
       <tr>
         <td class="docs">
 <div class="pilwrap">
-  <a class="pilcrow" href="#section-5" id="section-5">&#182;</a>
+  <a class="pilcrow" href="#section-6" id="section-6">&#182;</a>
 </div>
 <p><code>{{#empty [array]}}</code></p>
 
@@ -141,6 +154,7 @@ context, and execute the block with said context.</p>
     <span class="k">else</span>
       <span class="k">return</span> <span class="nx">options</span><span class="p">.</span><span class="nx">inverse</span><span class="p">(</span><span class="k">this</span><span class="p">);</span>
   <span class="p">}</span>
+<span class="p">};</span>
 <span class="p">};</span>
 </pre></div>
         </td>

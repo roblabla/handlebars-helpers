@@ -42,22 +42,16 @@
 <ul>
 <li><a href="helpers/collections.js.html">collections</a></li>
 <li><a href="helpers/comparisons.js.html">comparisons</a></li>
+<li><a href="helpers/layouts.js.html">layouts</a></li>
 <li><a href="helpers/logging.js.html">logging</a></li>
 <li><a href="helpers/strings.js.html">strings</a></li>
 </ul>
-        </td>
-        <td class="code highlight"><div class="highlight"><pre></pre></div>
-        </td>
-      </tr>
-      <tr>
-        <td class="docs">
-<div class="pilwrap">
-  <a class="pilcrow" href="#section-2" id="section-2">&#182;</a>
-</div>
+
+<p><a href="javascript:document.getElementById(%22tree%22).children%5B0%5D.children%5B1%5D.children%5B0%5D.classList.add(%22open%22)">Open helpers directory</a></p>
+
 <p>Convenience object : require('Handlebars-Helpers').helpers</p>
         </td>
-        <td class="code highlight"><div class="highlight"><pre>
-<span class="nx">module</span><span class="p">.</span><span class="nx">exports</span><span class="p">.</span><span class="nx">helpers</span> <span class="o">=</span> <span class="nx">require</span><span class="p">(</span><span class="s1">&#39;./helpers/all&#39;</span><span class="p">);</span>
+        <td class="code highlight"><div class="highlight"><pre><span class="nx">module</span><span class="p">.</span><span class="nx">exports</span><span class="p">.</span><span class="nx">helpers</span> <span class="o">=</span> <span class="nx">require</span><span class="p">(</span><span class="s1">&#39;./helpers/all&#39;</span><span class="p">);</span>
 
 
 </pre></div>
@@ -66,17 +60,18 @@
       <tr>
         <td class="docs">
 <div class="pilwrap">
-  <a class="pilcrow" href="#section-3" id="section-3">&#182;</a>
+  <a class="pilcrow" href="#section-2" id="section-2">&#182;</a>
 </div>
-<p>Simple function to register all the helpers into an Handlebars instance</p>
+<p>You NEED to give a handlebars object when registering, and optionally
+an option object. This options object right now is only used for the
+include helper, for cache and path resolution.</p>
         </td>
         <td class="code highlight"><div class="highlight"><pre>
-<span class="nx">module</span><span class="p">.</span><span class="nx">exports</span><span class="p">.</span><span class="nx">register</span> <span class="o">=</span> <span class="kd">function</span><span class="p">(</span><span class="nx">Handlebars</span><span class="p">,</span> <span class="nx">helpers</span><span class="p">)</span> <span class="p">{</span>
-  <span class="k">if</span> <span class="p">(</span><span class="k">typeof</span> <span class="nx">helpers</span> <span class="o">===</span> <span class="s2">&quot;undefined&quot;</span><span class="p">)</span>
-    <span class="nx">helpers</span> <span class="o">=</span> <span class="nx">require</span><span class="p">(</span><span class="s1">&#39;./helpers&#39;</span><span class="p">);</span>
-  <span class="nb">Object</span><span class="p">.</span><span class="nx">keys</span><span class="p">(</span><span class="nx">helpers</span><span class="p">).</span><span class="nx">forEach</span><span class="p">(</span><span class="kd">function</span> <span class="p">(</span><span class="nx">key</span><span class="p">)</span> <span class="p">{</span>
-    <span class="nx">Handlebars</span><span class="p">.</span><span class="nx">registerHelper</span><span class="p">(</span><span class="nx">key</span><span class="p">,</span> <span class="nx">helpers</span><span class="p">[</span><span class="nx">key</span><span class="p">]);</span>
-  <span class="p">});</span>
+<span class="nx">module</span><span class="p">.</span><span class="nx">exports</span><span class="p">.</span><span class="nx">register</span> <span class="o">=</span> <span class="kd">function</span> <span class="p">(</span><span class="nx">Handlebars</span><span class="p">,</span> <span class="nx">options</span><span class="p">)</span> <span class="p">{</span>
+  <span class="kd">var</span> <span class="nx">helpers</span> <span class="o">=</span> <span class="nx">module</span><span class="p">.</span><span class="nx">exports</span><span class="p">.</span><span class="nx">helpers</span><span class="p">(</span><span class="nx">Handlebars</span><span class="p">,</span> <span class="nx">options</span><span class="p">);</span>
+  <span class="k">for</span> <span class="p">(</span><span class="kd">var</span> <span class="nx">key</span> <span class="k">in</span> <span class="nx">helpers</span><span class="p">)</span>
+    <span class="k">if</span> <span class="p">(</span><span class="nx">helpers</span><span class="p">.</span><span class="nx">hasOwnProperty</span><span class="p">(</span><span class="nx">key</span><span class="p">))</span>
+      <span class="nx">Handlebars</span><span class="p">.</span><span class="nx">registerHelper</span><span class="p">(</span><span class="nx">key</span><span class="p">,</span> <span class="nx">helpers</span><span class="p">[</span><span class="nx">key</span><span class="p">]);</span>
 <span class="p">};</span>
 </pre></div>
         </td>

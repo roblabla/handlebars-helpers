@@ -35,18 +35,35 @@
 <div class="pilwrap">
   <a class="pilcrow" href="#section-1" id="section-1">&#182;</a>
 </div>
+
+        </td>
+        <td class="code highlight"><div class="highlight"><pre><span class="nx">module</span><span class="p">.</span><span class="nx">exports</span> <span class="o">=</span> <span class="kd">function</span> <span class="p">(</span><span class="nx">Handlebars</span><span class="p">,</span> <span class="nx">options</span><span class="p">)</span> <span class="p">{</span>
+
+</pre></div>
+        </td>
+      </tr>
+      <tr>
+        <td class="docs">
+<div class="pilwrap">
+  <a class="pilcrow" href="#section-2" id="section-2">&#182;</a>
+</div>
 <p>Load require nodejs modules</p>
         </td>
-        <td class="code highlight"><div class="highlight"><pre><span class="kd">var</span> <span class="nx">fs</span>    <span class="o">=</span> <span class="nx">require</span><span class="p">(</span><span class="s1">&#39;fs&#39;</span><span class="p">);</span>
+        <td class="code highlight"><div class="highlight"><pre>
+<span class="kd">var</span> <span class="nx">fs</span>    <span class="o">=</span> <span class="nx">require</span><span class="p">(</span><span class="s1">&#39;fs&#39;</span><span class="p">);</span>
 <span class="kd">var</span> <span class="nx">path</span>  <span class="o">=</span> <span class="nx">require</span><span class="p">(</span><span class="s1">&#39;path&#39;</span><span class="p">);</span>
 <span class="kd">var</span> <span class="nx">_</span>     <span class="o">=</span> <span class="nx">require</span><span class="p">(</span><span class="s1">&#39;lodash&#39;</span><span class="p">);</span>
 
-<span class="nx">module</span><span class="p">.</span><span class="nx">exports</span> <span class="o">=</span> <span class="p">{};</span>
+<span class="kd">var</span> <span class="nx">returnValue</span> <span class="o">=</span> <span class="p">{};</span>
 
 <span class="nx">fs</span><span class="p">.</span><span class="nx">readdirSync</span><span class="p">(</span><span class="nx">path</span><span class="p">.</span><span class="nx">join</span><span class="p">(</span><span class="nx">__dirname</span><span class="p">)).</span><span class="nx">forEach</span><span class="p">(</span><span class="kd">function</span><span class="p">(</span><span class="nx">file</span><span class="p">)</span> <span class="p">{</span>
-  <span class="k">if</span> <span class="p">(</span><span class="nx">file</span> <span class="o">!=</span> <span class="s1">&#39;all.js&#39;</span><span class="p">)</span>
-    <span class="nx">_</span><span class="p">.</span><span class="nx">extend</span><span class="p">(</span><span class="nx">module</span><span class="p">.</span><span class="nx">exports</span><span class="p">,</span> <span class="nx">require</span><span class="p">(</span><span class="s1">&#39;./&#39;</span><span class="o">+</span> <span class="nx">file</span><span class="p">));</span>
+  <span class="k">if</span> <span class="p">(</span><span class="nx">file</span> <span class="o">!=</span> <span class="s1">&#39;all.js&#39;</span><span class="p">)</span> <span class="p">{</span>
+    <span class="kd">var</span> <span class="nx">opts</span> <span class="o">=</span> <span class="nx">options</span><span class="p">[</span><span class="nx">path</span><span class="p">.</span><span class="nx">basename</span><span class="p">(</span><span class="nx">file</span><span class="p">,</span> <span class="s1">&#39;.js&#39;</span><span class="p">)];</span>
+    <span class="nx">_</span><span class="p">.</span><span class="nx">extend</span><span class="p">(</span><span class="nx">returnValue</span><span class="p">,</span> <span class="nx">require</span><span class="p">(</span><span class="s1">&#39;./&#39;</span><span class="o">+</span> <span class="nx">file</span><span class="p">)(</span><span class="nx">Handlebars</span><span class="p">,</span> <span class="nx">opts</span><span class="p">));</span>
+  <span class="p">}</span>
 <span class="p">});</span>
+<span class="k">return</span> <span class="nx">returnValue</span><span class="p">;</span>
+<span class="p">};</span>
 </pre></div>
         </td>
       </tr>
